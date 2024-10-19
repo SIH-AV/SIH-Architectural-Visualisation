@@ -1,0 +1,629 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+html{
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #000000;
+    color: #fff;
+}
+
+#header {
+    width: 100%;
+    height: 100vh;
+    background-image: url(images/test.jpg); /* Provide a valid image URL here */
+    background-size: cover;
+    background-position: center;
+}
+
+.header-text p {}
+.container {
+    padding: 10px 10%;
+}
+
+
+.container {
+    padding-top: 30px;
+}
+
+.header-text p {
+    padding-bottom: 15px; /* Adjust the value as needed */
+    font-size: 17px;
+    padding-top: 5px;
+    line-height: 1.6; /* Adjust the line-height as needed */
+}
+
+h2 {
+    padding-bottom: 0px;
+    font-size: 18px;
+    word-spacing: 5px; /* Adjust the value to increase or decrease space between words */
+}
+
+.container .header-text h1 {
+    font-size: 30px;
+    margin-bottom: 5px;
+    color: #ad5c10;
+}
+
+
+/* Navigation Styles */
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.logo {
+    width: 220px;
+    padding-top: 20px;
+}
+
+nav ul {
+    display: flex; /* Added this to allow flex properties for the list items */
+}
+
+nav ul li {
+    list-style: none; /* Removed inline-block display to use flex properties */
+    margin: 10px 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    position: relative;
+    transition: color 0.3s; /* Added transition */
+}
+
+nav ul li a::after {
+    content: '';
+    width: 0;
+    height: 3px;
+    background: #ad5c10;
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    transition: 0.5s;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* ----------Services---------- */
+#services {
+    padding: 0; /* Remove any vertical padding */
+    color: #ababab;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh; /* Make the services section take up the full viewport height */
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.services-col-1 {
+    flex-basis: 35%;
+}
+
+.services-col-1 img {
+    width: 100%;
+    border-radius: 15px;
+}
+
+.services-col-2 {
+    flex-basis: 60%;
+}
+
+.visuals-list {
+    margin: 20px 0; /* Adjust list margin */
+    padding-left: 20px; /* Add padding to list */
+    list-style-type: disc; /* Use bullet points */
+    color: #fff; /* Change to desired color */
+    font-size: 17px;
+}
+
+
+.visuals-list li {
+    margin: 10px 0; /* Space between list items */
+}
+
+/* Additional styles for paragraph text */
+.services-col-2 p {
+    line-height: 1.6; /* Increase line height for readability */
+    margin-bottom: 20px; /* Adjust bottom margin for paragraph spacing */
+    color: #fff; /* Change to desired color */
+    font-size: 17px;
+}
+
+/* Sub-title Styling for both sections */
+.sub-title {
+    font-size: 60px;
+    font-weight: 600;
+    color: #fff;
+}
+
+
+/* Gap between Services and Prices */
+/* Prices Wrapper */
+.prices-wrapper {
+    width: 100%; /* Full width */
+    text-align: center; /* Center text */
+    padding: 25px 0; /* Padding around the Prices section */
+    background: #000000; /* Background color */
+    font-weight: 300; /* Font weight */
+    margin: 20px 0 80px; /* Decreased top margin to reduce gap */
+    padding-bottom: 320px;
+}
+
+.tab-contents ul li:first-of-type {
+    max-width: 80%; /* Adjust percentage as needed */
+    margin: 0 auto; /* Center the content */
+}
+
+
+/* Centering the Titles */
+.prices-title {
+    margin-bottom: 20px; /* Space below the title */
+    padding-top: 300px;
+}
+
+
+/* Tab Titles and Contents Styles */
+.tab-titles {
+    display: flex; /* Use flexbox for tab titles */
+    justify-content: center; /* Center the tab titles */
+    margin: 20px 0; /* Margin for spacing */
+    position: relative; /* Set position for pseudo-element */
+    font-size: 20px;
+}
+
+.tab-links {
+    margin: 0 20px; /* Space between each tab link */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    position: relative; /* Set position for pseudo-element */
+    padding: 5px; /* Add padding for better click area */
+}
+
+.tab-links::after {
+    content: '';
+    width: 0;
+    height: 3px;
+    background: #ad5c10; /* Line color */
+    position: absolute;
+    left: 50%; /* Center the line */
+    bottom: -8px; /* Position below the link */
+    transition: width 0.5s ease, left 0.5s ease; /* Animate the line */
+}
+
+.tab-links.active-link::after {
+    width: 100%; /* Full width when active */
+    left: 0; /* Align to left when active */
+}
+
+/* Tab Contents */
+.tab-contents {
+    display: none; /* All tab contents are hidden by default */
+}
+
+.tab-contents.active-tab {
+    display: block; /* Show the active tab content */
+}
+
+/* List Styles */
+/* Tab Contents List Styles */
+.tab-contents ul li {
+    list-style: none; /* No bullet points */
+    margin: 20px 0; /* Increased space between each list item */
+    padding: 5px 0; /* Optional: add padding for additional spacing */
+    font-size: 17px; /* Font size for list items */
+    color: #ad5c10; /* Orange color for list items */
+    line-height: 1.6; /* Adjust the line-height as needed */
+}
+
+.tab-contents ul li span {
+    color: #fff; /* White color for sub-title */
+    font-size: 17px; /* Font size for sub-title */
+    line-height: 1.6; /* Adjust the line-height as needed */
+}
+
+
+/* Active Link Style */
+.active-link {
+    font-weight: bold; /* Bold font for active link */
+}
+
+
+/* Gallery Container */
+.container-gallery {
+    padding: 40px;
+    text-align: center;
+}
+
+/* Work Gallery Section */
+#work-gallery-section {
+    background-color: #000000;
+    color: #fff;
+    padding: 50px 0;
+}
+
+.gallery-title {
+    font-size: 60px;
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-weight: 600
+}
+
+/* Updated Gallery Grid */
+.gallery-grid {
+    display: grid; /* Use grid layout */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive columns */
+    gap: 20px; /* Increased gap between thumbnails */
+    justify-items: center; /* Center the grid items horizontally */
+}
+
+/* Individual Gallery Items */
+.gallery-item {
+    width: 100%; /* Allow full use of grid column */
+    height: 200px; /* Fixed height for consistency */
+    overflow: hidden;
+    position: relative;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 10px; /* Curved edges for images */
+    transition: transform 0.3s;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.05); /* Slightly larger hover effect */
+}
+
+/* Modal for Image Display */
+.modal-gallery {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 9999;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Black with opacity */
+}
+
+.modal-content-gallery {
+    margin: auto;
+    display: block;
+    max-width: 90%; /* Responsive max-width */
+    max-height: 90%; /* Responsive max-height */
+}
+
+/* Animation for Modal */
+.modal-content-gallery,
+.gallery-caption {
+    animation: zoom 0.6s;
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+/* Caption for the Image */
+#gallery-caption {
+    display: none; /* Hide the caption when enlarging the image */
+}
+
+/* Close Button */
+.close-gallery {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.close-gallery:hover {
+    color: #ad5c10;
+}
+
+/* Next and Previous Buttons */
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: #fff; /* Default color */
+    font-weight: bold;
+    font-size: 40px;
+    transition: 0.6s ease;
+    user-select: none;
+}
+
+/* Hover effect for the prev and next buttons */
+.prev:hover,
+.next:hover {
+    color: #ad5c10; /* Color when hovered */
+    background-color: rgba(255, 255, 255, 0.2); /* Optional: Add a slight background change on hover for better visibility */
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on small screens */
+    }
+    
+    .services-col-1,
+    .services-col-2 {
+        flex-basis: 100%; /* Stacks columns on smaller screens */
+    }
+}
+
+/* Header Text */
+.header-text {
+    margin-top: 20%;
+    font-size: 30px;
+}
+
+.header-text h1 {
+    font-size: 60px;
+    margin-top: 20px;
+}
+
+/* Contact Section */
+.contact-left {
+    flex-basis: 35%;
+    padding: 100px;
+}
+
+.contact-right {
+    flex-basis: 65%;
+    padding: 100px;
+}
+
+.contact-left p {
+    margin-top: 30px;
+    font-size: 18px;
+}
+
+.contact-left p i {
+    color: #ad5c10;
+    margin-right: 15px;
+    font-size: 25px;
+}
+
+/* Button Styles */
+.btn {
+    display: block;
+    margin: 50px auto;
+    width: fit-content;
+    border: 1px solid #ad5c10;
+    padding: 14px 50px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #ffffff; /* Changed to white for contrast against black */
+    background: #000000; /* Set background color to black */
+    transition: background 0.5s;
+}
+
+.btn:hover {
+    background: #ad5c10; /* Background color on hover */
+}
+
+.btn.btn2 {
+    display: inline-block;
+}
+
+.content-right form { /* Fixed incorrect selector from 'from' to 'form' */
+    width: 100%;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    border: 0;
+    outline: none;
+    background: #262626;
+    padding: 15px;
+    margin: 15px 0;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 6px;
+}
+
+form .btn2 {
+    padding: 14px 60px;
+    font-size: 18px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+/* Footer Styles */
+.copyright {
+    width: 100%;
+    text-align: center;
+    padding: 25px 0;
+    background: #262626;
+    font-weight: 300;
+    margin-top: 20px;
+}
+#msg{
+    color: #ad5c10;
+    margin-top: -20px;
+    display: block;
+}
+
+/* Responsive Adjustments for Small Screens */
+@media only screen and (max-width: 600px) {
+    /* Make header background image responsive */
+    #header {
+        background-image: url(images/test.webp);
+        background-size: cover;
+        height: auto; /* Adjust to auto to fit content */
+    }
+
+    /* Adjust header text */
+    .header-text {
+        font-size: 16px; /* Smaller font size for small screens */
+        margin-top: 5%; /* Adjust margin */
+    }
+
+    .header-text h1 {
+        font-size: 28px; /* Smaller heading size */
+        margin-top: 10px;
+    }
+
+    /* Hide the main navigation and show side menu */
+    nav ul {
+        display: none; /* Hide default navigation on smaller screens */
+    }
+
+    /* Hamburger menu (3-line menu) */
+    .menu-btn {
+        font-size: 30px;
+        color: white;
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        z-index: 1001;
+        cursor: pointer;
+    }
+
+    .menu-btn div {
+        width: 35px;
+        height: 4px;
+        background-color: white;
+        margin: 6px 0;
+    }
+
+    /* Side menu bar styles */
+    .side-menu {
+        position: fixed;
+        top: 0;
+        left: -250px;
+        width: 250px;
+        height: 100%;
+        background: #000000;
+        padding-top: 60px;
+        transition: 0.3s;
+        z-index: 1000;
+    }
+
+    .side-menu a {
+        padding: 10px 15px;
+        text-decoration: none;
+        font-size: 16px; /* Smaller font size for small screens */
+        color: white;
+        display: block;
+        transition: 0.3s;
+    }
+
+    .side-menu a:hover {
+        background-color: #ad5c10;
+    }
+
+    /* Side menu toggle */
+    .side-menu.open {
+        left: 0;
+    }
+
+    /* Close button inside the side menu */
+    .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 30px;
+        cursor: pointer;
+        color: white;
+    }
+
+    /* Adjust image sizes */
+    .gallery-item img {
+        width: 100%;
+        height: auto; /* Maintain aspect ratio */
+        object-fit: cover;
+    }
+
+    /* Make services section stack vertically */
+    .services-col-1,
+    .services-col-2 {
+        flex-basis: 100%; /* Stacks columns on smaller screens */
+        margin-bottom: 20px;
+    }
+
+    /* Adjust visuals list */
+    .visuals-list {
+        font-size: 14px; /* Smaller text for small screens */
+    }
+
+    /* Adjust tab content list */
+    .tab-contents ul li {
+        font-size: 14px; /* Smaller font size */
+    }
+
+    /* Contact section adjustments */
+    .contact-left,
+    .contact-right {
+        flex-basis: 100%; /* Full width for smaller screens */
+        padding: 20px;
+    }
+
+    /* Button adjustments */
+    .btn {
+        padding: 10px 30px; /* Adjust padding for smaller buttons */
+        font-size: 16px; /* Smaller font size */
+    }
+
+    /* Adjusting other text elements to prevent overlap */
+    h2 {
+        font-size: 16px; /* Smaller font size */
+        word-spacing: 3px; /* Adjust word spacing */
+    }
+
+    .services-col-2 p {
+        font-size: 14px; /* Smaller font size for paragraphs */
+        margin-bottom: 15px; /* Adjust bottom margin for spacing */
+    }
+
+    .gallery-title {
+        font-size: 30px; /* Smaller font size for gallery title */
+    }
+
+    .copyright {
+        font-size: 12px; /* Smaller font size for copyright */
+    }
+}
