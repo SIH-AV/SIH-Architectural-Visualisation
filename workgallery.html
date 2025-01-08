@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIH Architectural Visualisation</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+</head>
+<body oncontextmenu="return false">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <img src="LOGO FINAL.png" alt="Your Logo" class="logo-image">
+        </a>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">HOME</a>
+            <a href="workgallery.html">WORK GALLERY</a>
+            <a href="services.html">SERVICES</a>
+            <a href="index.html#pricing">PRICING</a>
+            <a href="index.html#contact">CONTACT</a>
+        </div>
+    </nav>
+    
+    <!-- Main Content Section -->
+    <main class="gallery-content">
+        <div class="gallery-container">
+            <div class="gallery-grid">
+                <!-- Gallery items will be dynamically added here -->
+            </div>
+        </div>
+
+        <!-- Lightbox -->
+        <div id="lightbox" class="lightbox">
+            <span class="close-btn" onclick="closeLightbox()">&times;</span>
+            <button class="nav-btn prev" onclick="changeImage(-1)"><span>&#10094;</span></button>
+            <button class="nav-btn next" onclick="changeImage(1)"><span>&#10095;</span></button>
+            <div class="lightbox-content">
+                <img id="lightbox-img" src="" alt="Enlarged Image">
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Copyrights © SIH Architectural Visualisation 2024 | All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        // Prevent right-click and Ctrl+S
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && (event.key === 's' || event.key === 'S')) {
+                event.preventDefault();
+            }
+        });
+
+        let galleryImages = [];
+        const FOLDER_NAME = "Images"; // Change this to your folder name
+        
+        function loadGallery() {
+            const galleryGrid = document.querySelector('.gallery-grid');
+            galleryGrid.innerHTML = '';
+            galleryImages = [];
+            
+            function tryLoadImage(index) {
+                const img = new Image();
+                img.onload = function() {
+                    galleryImages.push({
+                        src: img.src,
+                        alt: `Image ${index + 1}`
+                    });
+                    
+                    const galleryItem = document.createElement('div');
+                    galleryItem.className = 'gallery-item';
+                    galleryItem.innerHTML = `
+                        <img class="lazy-image" 
+                             src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
+                             data-src="${img.src}" 
+                             alt="Image ${index + 1}" 
+                             onclick="openLightbox(${galleryImages.length - 1})">
+                    `;
+                    galleryGrid.appendChild(galleryItem);
+                    
+                    tryLoadImage(index + 1);
+                };
+                
+                img.onerror = function() {
+                    if (index === 0) {
+                        galleryGrid.innerHTML = '<p style="color: white;">No images found in this folder</p>';
+                    } else {
+                        lazyLoad();
+                    }
+                };
+                
+                img.src = `${FOLDER_NAME}/${index + 1}.jpg`;
+            }
+            
+            tryLoadImage(0);
+        }
+
+        // Lazy loading implementation
+        const lazyLoad = () => {
+            const lazyImages = document.querySelectorAll('.lazy-image');
+            
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.add('image-placeholder');
+                        
+                        img.onload = function() {
+                            img.classList.remove('image-placeholder');
+                            img.classList.add('loaded');
+                        };
+                        
+                        observer.unobserve(img);
+                    }
+                });
+            }, {
+                rootMargin: '50px 0px',
+                threshold: 0.01
+            });
+
+            lazyImages.forEach(img => imageObserver.observe(img));
+        };
+
+        // Lightbox functionality
+        let currentImageIndex = 0;
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        function openLightbox(index) {
+            currentImageIndex = index;
+            lightbox.style.display = 'flex';
+            lightboxImg.src = galleryImages[currentImageIndex].src;
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function changeImage(direction) {
+            currentImageIndex = (currentImageIndex + direction + galleryImages.length) % galleryImages.length;
+            lightboxImg.src = galleryImages[currentImageIndex].src;
+        }
+
+        // Close lightbox when clicking outside the image
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (lightbox.style.display === 'flex') {
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                } else if (e.key === 'ArrowLeft') {
+                    changeImage(-1);
+                } else if (e.key === 'ArrowRight') {
+                    changeImage(1);
+                }
+            }
+        });
+
+        // Load gallery on page load
+        window.addEventListener('DOMContentLoaded', loadGallery);
+
+        // Universal navigation highlighting script
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all nav links
+    const navLinks = document.querySelectorAll('.nav-links a');
+    
+    // Get current page path and hash
+    const currentPath = window.location.pathname;
+    const currentHash = window.location.hash;
+    const currentPage = currentPath.split('/').pop() || 'index.html';
+
+    // Function to update active nav link
+    function updateActiveNav() {
+        // Remove active class from all links
+        navLinks.forEach(link => link.classList.remove('active'));
+        
+        // For index.html with sections
+        if (currentPage === 'index.html') {
+            const sections = ['home', 'pricing', 'contact'];
+            const scrollPosition = window.scrollY;
+            
+            // Find current section
+            let currentSection = null;
+            for (const sectionId of sections) {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                        currentSection = sectionId;
+                        break;
+                    }
+                }
+            }
+            
+            // Highlight corresponding nav link
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (currentSection === 'home' && href === 'index.html') {
+                    link.classList.add('active');
+                } else if (href.includes(`#${currentSection}`)) {
+                    link.classList.add('active');
+                }
+            });
+        } 
+        // For other pages
+        else {
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href === currentPage || 
+                    (currentPage === 'index.html' && href === 'index.html') ||
+                    (href.includes(currentPage))) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    }
+
+    // Add scroll event listener for index.html
+    if (currentPage === 'index.html') {
+        window.addEventListener('scroll', updateActiveNav);
+    }
+    
+    // Initial call to set active state
+    updateActiveNav();
+});
+const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const body = document.querySelector('body');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            body.classList.toggle('no-scroll');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+                body.classList.remove('no-scroll');
+            });
+        });
+    </script>
+
+
+</body>
+</html>

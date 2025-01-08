@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIH Architectural Visualisation</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        /* Add this inline to adjust the text size */
+        .services-description {
+            font-size: 1.1rem !important; /* Overriding the original size */
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* Adjust responsive text size */
+        @media (max-width: 768px) {
+            .services-description {
+                font-size: 0.95rem !important;
+            }
+        }
+    </style>
+</head>
+<body oncontextmenu="return false">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <img src="LOGO FINAL.png" alt="Your Logo" class="logo-image">
+        </a>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">HOME</a>
+            <a href="workgallery.html">WORK GALLERY</a>
+            <a href="services.html">SERVICES</a>
+            <a href="index.html#pricing">PRICING</a>
+            <a href="index.html#contact">CONTACT</a>
+        </div>
+    </nav>
+    
+    <!-- Services Content -->
+    <main class="services-content">
+        <div class="services-container">
+            <div class="services-image">
+                <img src="63copy.jpg" alt="Services Image">
+            </div>
+            <div class="services-text">
+                <h1 class="services-title">Our Services</h1>
+                <div class="services-description">
+                    <p>A well-executed visualization is a powerful tool. At SIH AV, we meticulously evaluate each design to find the ideal composition, the most flattering angles, and inspired styling. We produce exceptional architectural renderings for clients in Perth, Sydney, Melbourne, Brisbane, and across the globe.</p>
+                    <br>
+                    <p>Marketing Visuals Strategy:</p>
+                    <br>
+                    <p style="margin-left: 20px;">Being able to sell unbuilt property off-plan is a crucial element to the success of a project. A series of high quality 3D visuals will:</p>
+                    <br>
+                    <p style="margin-left: 20px;">• Elevate the perceived value of your product</p>
+                    <p style="margin-left: 20px;">• Spark desire and drive demand for your project</p>
+                    <p style="margin-left: 20px;">• Accelerate sales</p>
+                    <p style="margin-left: 20px;">• Differentiate your project from competitors</p>
+                    <p style="margin-left: 20px;">• Enhance your brand value</p>
+                    <br>
+                    <p>Investing in high-quality, photo-realistic architectural visualization yields substantial returns. It adds value to your project, creates desire for your design, and helps you achieve faster sales at a premium price. Your project will stand out, generate buzz, and actively engage potential buyers and clients.</p>
+                    <br>
+                    <p>We also offer the services of an experienced architectural photographer for street view and aerial drone photography. These images can be used in town planning applications and as photomontage backdrops for council submissions.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Copyrights © SIH Architectural Visualisation 2024 | All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        // Prevent right-click and Ctrl+S
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && (event.key === 's' || event.key === 'S')) {
+                event.preventDefault();
+            }
+        });
+
+        // Universal navigation highlighting script
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all nav links
+    const navLinks = document.querySelectorAll('.nav-links a');
+    
+    // Get current page path and hash
+    const currentPath = window.location.pathname;
+    const currentHash = window.location.hash;
+    const currentPage = currentPath.split('/').pop() || 'index.html';
+
+    // Function to update active nav link
+    function updateActiveNav() {
+        // Remove active class from all links
+        navLinks.forEach(link => link.classList.remove('active'));
+        
+        // For index.html with sections
+        if (currentPage === 'index.html') {
+            const sections = ['home', 'pricing', 'contact'];
+            const scrollPosition = window.scrollY;
+            
+            // Find current section
+            let currentSection = null;
+            for (const sectionId of sections) {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                        currentSection = sectionId;
+                        break;
+                    }
+                }
+            }
+            
+            // Highlight corresponding nav link
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (currentSection === 'home' && href === 'index.html') {
+                    link.classList.add('active');
+                } else if (href.includes(`#${currentSection}`)) {
+                    link.classList.add('active');
+                }
+            });
+        } 
+        // For other pages
+        else {
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href === currentPage || 
+                    (currentPage === 'index.html' && href === 'index.html') ||
+                    (href.includes(currentPage))) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    }
+
+    // Add scroll event listener for index.html
+    if (currentPage === 'index.html') {
+        window.addEventListener('scroll', updateActiveNav);
+    }
+    
+    // Initial call to set active state
+    updateActiveNav();
+});
+const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const body = document.querySelector('body');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            body.classList.toggle('no-scroll');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+                body.classList.remove('no-scroll');
+            });
+        });
+    </script>
+
+    
+</body>
+</html>
