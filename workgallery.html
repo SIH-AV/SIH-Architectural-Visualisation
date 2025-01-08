@@ -62,49 +62,57 @@
             }
         });
 
-        let galleryImages = [];
-        const FOLDER_NAME = "Images"; // Change this to your folder name
+// Get the repository name from the current URL
+function getRepoPath() {
+    const pathSegments = window.location.pathname.split('/');
+    // If site is hosted at root (username.github.io), return empty string
+    // Otherwise return /repository-name
+    return pathSegments.length > 2 ? `/${pathSegments[1]}` : '';
+}
+
+let galleryImages = [];
+const FOLDER_NAME = `${getRepoPath()}/Images`; // Dynamically set the folder path
+
+function loadGallery() {
+    const galleryGrid = document.querySelector('.gallery-grid');
+    galleryGrid.innerHTML = '';
+    galleryImages = [];
+    
+    function tryLoadImage(index) {
+        const img = new Image();
+        img.onload = function() {
+            galleryImages.push({
+                src: img.src,
+                alt: `Image ${index + 1}`
+            });
+            
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'gallery-item';
+            galleryItem.innerHTML = `
+                <img class="lazy-image" 
+                     src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
+                     data-src="${img.src}" 
+                     alt="Image ${index + 1}" 
+                     onclick="openLightbox(${galleryImages.length - 1})">
+            `;
+            galleryGrid.appendChild(galleryItem);
+            
+            tryLoadImage(index + 1);
+        };
         
-        function loadGallery() {
-            const galleryGrid = document.querySelector('.gallery-grid');
-            galleryGrid.innerHTML = '';
-            galleryImages = [];
-            
-            function tryLoadImage(index) {
-                const img = new Image();
-                img.onload = function() {
-                    galleryImages.push({
-                        src: img.src,
-                        alt: `Image ${index + 1}`
-                    });
-                    
-                    const galleryItem = document.createElement('div');
-                    galleryItem.className = 'gallery-item';
-                    galleryItem.innerHTML = `
-                        <img class="lazy-image" 
-                             src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
-                             data-src="${img.src}" 
-                             alt="Image ${index + 1}" 
-                             onclick="openLightbox(${galleryImages.length - 1})">
-                    `;
-                    galleryGrid.appendChild(galleryItem);
-                    
-                    tryLoadImage(index + 1);
-                };
-                
-                img.onerror = function() {
-                    if (index === 0) {
-                        galleryGrid.innerHTML = '<p style="color: white;">No images found in this folder</p>';
-                    } else {
-                        lazyLoad();
-                    }
-                };
-                
-                img.src = `${FOLDER_NAME}/${index + 1}.jpg`;
+        img.onerror = function() {
+            if (index === 0) {
+                galleryGrid.innerHTML = '<p style="color: white;">No images found in this folder</p>';
+            } else {
+                lazyLoad();
             }
-            
-            tryLoadImage(0);
-        }
+        };
+        
+        img.src = `${FOLDER_NAME}/${index + 1}.jpg`;
+    }
+    
+    tryLoadImage(0);
+}
 
         // Lazy loading implementation
         const lazyLoad = () => {
