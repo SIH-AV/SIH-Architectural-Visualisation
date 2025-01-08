@@ -20,7 +20,7 @@
         </div>
         <div class="nav-links">
             <a href="index.html">HOME</a>
-            <a href="workgallery.html">WORK GALLERY</a>
+            <a href="portfolio.html">WORK GALLERY</a>
             <a href="services.html">SERVICES</a>
             <a href="index.html#pricing">PRICING</a>
             <a href="index.html#contact">CONTACT</a>
@@ -65,86 +65,7 @@
         let galleryImages = [];
         const FOLDER_NAME = "Final Images"; // Change this to your folder name
         
-// Gallery loading function
-function loadGallery() {
-    const galleryGrid = document.querySelector('.gallery-grid');
-    galleryGrid.innerHTML = '';
-    galleryImages = [];
-    
-    function tryLoadImage(index) {
-        const img = new Image();
-        img.onload = function() {
-            galleryImages.push({
-                src: img.src,
-                alt: `Image ${index + 1}`
-            });
-            
-            const galleryItem = document.createElement('div');
-            galleryItem.className = 'gallery-item';
-            galleryItem.innerHTML = `
-                <img class="lazy-image" 
-                     src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
-                     data-src="${img.src}" 
-                     alt="Image ${index + 1}" 
-                     onclick="openLightbox(${galleryImages.length - 1})"
-                     loading="lazy">
-            `;
-            galleryGrid.appendChild(galleryItem);
-            
-            // Initialize lazy loading for this image
-            if ('IntersectionObserver' in window) {
-                observeImage(galleryItem.querySelector('.lazy-image'));
-            } else {
-                // Fallback for browsers that don't support IntersectionObserver
-                galleryItem.querySelector('.lazy-image').src = img.src;
-            }
-            
-            tryLoadImage(index + 1);
-        };
-        
-        img.onerror = function() {
-            if (index === 0) {
-                galleryGrid.innerHTML = '<p style="color: white;">No images found in this folder</p>';
-            }
-        };
-        
-        img.src = `${FOLDER_NAME}/${index + 1}.jpg`;
-    }
-    
-    // Create and configure IntersectionObserver
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.classList.add('loaded');
-                observer.unobserve(img);
-            }
-        });
-    }, {
-        rootMargin: '50px 0px', // Start loading images 50px before they enter viewport
-        threshold: 0.01 // Trigger when even 1% of the image is visible
-    });
-    
-    function observeImage(img) {
-        imageObserver.observe(img);
-    }
-    
-    // Start loading the first image
-    tryLoadImage(0);
-}
-
-// Add these event listeners
-document.addEventListener('DOMContentLoaded', loadGallery);
-
-// Update lightbox functionality to work with lazy-loaded images
-function openLightbox(index) {
-    currentImageIndex = index;
-    lightbox.style.display = 'flex';
-    lightboxImg.src = galleryImages[currentImageIndex].src;
-    document.body.style.overflow = 'hidden';
-}
-
+        // Gallery loading function
         function loadGallery() {
             const galleryGrid = document.querySelector('.gallery-grid');
             galleryGrid.innerHTML = '';
@@ -161,9 +82,7 @@ function openLightbox(index) {
                     const galleryItem = document.createElement('div');
                     galleryItem.className = 'gallery-item';
                     galleryItem.innerHTML = `
-                        <img class="lazy-image" 
-                             src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
-                             data-src="${img.src}" 
+                        <img src="${img.src}" 
                              alt="Image ${index + 1}" 
                              onclick="openLightbox(${galleryImages.length - 1})">
                     `;
@@ -175,8 +94,6 @@ function openLightbox(index) {
                 img.onerror = function() {
                     if (index === 0) {
                         galleryGrid.innerHTML = '<p style="color: white;">No images found in this folder</p>';
-                    } else {
-                        lazyLoad();
                     }
                 };
                 
@@ -185,33 +102,6 @@ function openLightbox(index) {
             
             tryLoadImage(0);
         }
-
-        // Lazy loading implementation
-        const lazyLoad = () => {
-            const lazyImages = document.querySelectorAll('.lazy-image');
-            
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        img.src = img.dataset.src;
-                        img.classList.add('image-placeholder');
-                        
-                        img.onload = function() {
-                            img.classList.remove('image-placeholder');
-                            img.classList.add('loaded');
-                        };
-                        
-                        observer.unobserve(img);
-                    }
-                });
-            }, {
-                rootMargin: '50px 0px',
-                threshold: 0.01
-            });
-
-            lazyImages.forEach(img => imageObserver.observe(img));
-        };
 
         // Lightbox functionality
         let currentImageIndex = 0;
@@ -255,76 +145,62 @@ function openLightbox(index) {
             }
         });
 
-        // Load gallery on page load
-        window.addEventListener('DOMContentLoaded', loadGallery);
-
         // Universal navigation highlighting script
-document.addEventListener('DOMContentLoaded', function() {
-    // Get all nav links
-    const navLinks = document.querySelectorAll('.nav-links a');
-    
-    // Get current page path and hash
-    const currentPath = window.location.pathname;
-    const currentHash = window.location.hash;
-    const currentPage = currentPath.split('/').pop() || 'index.html';
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-links a');
+            const currentPath = window.location.pathname;
+            const currentPage = currentPath.split('/').pop() || 'index.html';
 
-    // Function to update active nav link
-    function updateActiveNav() {
-        // Remove active class from all links
-        navLinks.forEach(link => link.classList.remove('active'));
-        
-        // For index.html with sections
-        if (currentPage === 'index.html') {
-            const sections = ['home', 'pricing', 'contact'];
-            const scrollPosition = window.scrollY;
-            
-            // Find current section
-            let currentSection = null;
-            for (const sectionId of sections) {
-                const section = document.getElementById(sectionId);
-                if (section) {
-                    const sectionTop = section.offsetTop - 100;
-                    const sectionBottom = sectionTop + section.offsetHeight;
+            function updateActiveNav() {
+                navLinks.forEach(link => link.classList.remove('active'));
+                
+                if (currentPage === 'index.html') {
+                    const sections = ['home', 'pricing', 'contact'];
+                    const scrollPosition = window.scrollY;
                     
-                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-                        currentSection = sectionId;
-                        break;
+                    let currentSection = null;
+                    for (const sectionId of sections) {
+                        const section = document.getElementById(sectionId);
+                        if (section) {
+                            const sectionTop = section.offsetTop - 100;
+                            const sectionBottom = sectionTop + section.offsetHeight;
+                            
+                            if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                                currentSection = sectionId;
+                                break;
+                            }
+                        }
                     }
+                    
+                    navLinks.forEach(link => {
+                        const href = link.getAttribute('href');
+                        if (currentSection === 'home' && href === 'index.html') {
+                            link.classList.add('active');
+                        } else if (href.includes(`#${currentSection}`)) {
+                            link.classList.add('active');
+                        }
+                    });
+                } else {
+                    navLinks.forEach(link => {
+                        const href = link.getAttribute('href');
+                        if (href === currentPage || 
+                            (currentPage === 'index.html' && href === 'index.html') ||
+                            (href.includes(currentPage))) {
+                            link.classList.add('active');
+                        }
+                    });
                 }
             }
-            
-            // Highlight corresponding nav link
-            navLinks.forEach(link => {
-                const href = link.getAttribute('href');
-                if (currentSection === 'home' && href === 'index.html') {
-                    link.classList.add('active');
-                } else if (href.includes(`#${currentSection}`)) {
-                    link.classList.add('active');
-                }
-            });
-        } 
-        // For other pages
-        else {
-            navLinks.forEach(link => {
-                const href = link.getAttribute('href');
-                if (href === currentPage || 
-                    (currentPage === 'index.html' && href === 'index.html') ||
-                    (href.includes(currentPage))) {
-                    link.classList.add('active');
-                }
-            });
-        }
-    }
 
-    // Add scroll event listener for index.html
-    if (currentPage === 'index.html') {
-        window.addEventListener('scroll', updateActiveNav);
-    }
-    
-    // Initial call to set active state
-    updateActiveNav();
-});
-const hamburger = document.querySelector('.hamburger');
+            if (currentPage === 'index.html') {
+                window.addEventListener('scroll', updateActiveNav);
+            }
+            
+            updateActiveNav();
+        });
+
+        // Mobile menu functionality
+        const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
         const body = document.querySelector('body');
 
@@ -334,7 +210,6 @@ const hamburger = document.querySelector('.hamburger');
             body.classList.toggle('no-scroll');
         });
 
-        // Close mobile menu when clicking a link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('active');
@@ -342,8 +217,9 @@ const hamburger = document.querySelector('.hamburger');
                 body.classList.remove('no-scroll');
             });
         });
+
+        // Load gallery on page load - single call
+        document.addEventListener('DOMContentLoaded', loadGallery);
     </script>
-
-
 </body>
 </html>
