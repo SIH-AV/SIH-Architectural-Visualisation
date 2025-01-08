@@ -63,9 +63,9 @@
         });
 
         let galleryImages = [];
-        const FOLDER_NAME = "Final Images";
+        const FOLDER_NAME = "Final Images"; // Change this to your folder name
         
-        // Simplified gallery loading function without lazy loading
+        // Gallery loading function
         function loadGallery() {
             const galleryGrid = document.querySelector('.gallery-grid');
             galleryGrid.innerHTML = '';
@@ -145,9 +145,6 @@
             }
         });
 
-        // Load gallery on page load
-        window.addEventListener('DOMContentLoaded', loadGallery);
-
         // Universal navigation highlighting script
         document.addEventListener('DOMContentLoaded', function() {
             const navLinks = document.querySelectorAll('.nav-links a');
@@ -220,6 +217,9 @@
                 body.classList.remove('no-scroll');
             });
         });
+
+        // Load gallery on page load - single call
+        document.addEventListener('DOMContentLoaded', loadGallery);
     </script>
 </body>
 </html>
