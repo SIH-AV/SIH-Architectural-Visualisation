@@ -64,6 +64,86 @@
 
         let galleryImages = [];
         const FOLDER_NAME = "Final Images"; // Change this to your folder name
+
+// Gallery loading function
+function loadGallery() {
+    const galleryGrid = document.querySelector('.gallery-grid');
+    galleryGrid.innerHTML = '';
+    galleryImages = [];
+    
+    function tryLoadImage(index) {
+        const img = new Image();
+        img.onload = function() {
+            galleryImages.push({
+                src: img.src,
+                alt: `Image ${index + 1}`
+            });
+            
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'gallery-item';
+            galleryItem.innerHTML = `
+                <img class="lazy-image" 
+                     src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
+                     data-src="${img.src}" 
+                     alt="Image ${index + 1}" 
+                     onclick="openLightbox(${galleryImages.length - 1})"
+                     loading="lazy">
+            `;
+            galleryGrid.appendChild(galleryItem);
+            
+            // Initialize lazy loading for this image
+            if ('IntersectionObserver' in window) {
+                observeImage(galleryItem.querySelector('.lazy-image'));
+            } else {
+                // Fallback for browsers that don't support IntersectionObserver
+                galleryItem.querySelector('.lazy-image').src = img.src;
+            }
+            
+            tryLoadImage(index + 1);
+        };
+        
+        img.onerror = function() {
+            if (index === 0) {
+                galleryGrid.innerHTML = '<p style="color: white;">No images found in this folder</p>';
+            }
+        };
+        
+        img.src = `${FOLDER_NAME}/${index + 1}.jpg`;
+    }
+    
+    // Create and configure IntersectionObserver
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.classList.add('loaded');
+                observer.unobserve(img);
+            }
+        });
+    }, {
+        rootMargin: '50px 0px', // Start loading images 50px before they enter viewport
+        threshold: 0.01 // Trigger when even 1% of the image is visible
+    });
+    
+    function observeImage(img) {
+        imageObserver.observe(img);
+    }
+    
+    // Start loading the first image
+    tryLoadImage(0);
+}
+
+// Add these event listeners
+document.addEventListener('DOMContentLoaded', loadGallery);
+
+// Update lightbox functionality to work with lazy-loaded images
+function openLightbox(index) {
+    currentImageIndex = index;
+    lightbox.style.display = 'flex';
+    lightboxImg.src = galleryImages[currentImageIndex].src;
+    document.body.style.overflow = 'hidden';
+}
         
         function loadGallery() {
             const galleryGrid = document.querySelector('.gallery-grid');
