@@ -20,7 +20,7 @@
         </div>
         <div class="nav-links">
             <a href="index.html">HOME</a>
-            <a href="portfolio.html">WORK GALLERY</a>
+            <a href="workgallery.html">WORK GALLERY</a>
             <a href="services.html">SERVICES</a>
             <a href="index.html#pricing">PRICING</a>
             <a href="index.html#contact">CONTACT</a>
@@ -63,7 +63,7 @@
         });
 
         let galleryImages = [];
-        const FOLDER_NAME = "Final Images"; // Change this to your folder name
+        const FOLDER_NAME = "Final Images";
         
         // Gallery loading function
         function loadGallery() {
@@ -145,10 +145,14 @@
             }
         });
 
+        // Load gallery on page load
+        window.addEventListener('DOMContentLoaded', loadGallery);
+
         // Universal navigation highlighting script
         document.addEventListener('DOMContentLoaded', function() {
             const navLinks = document.querySelectorAll('.nav-links a');
             const currentPath = window.location.pathname;
+            const currentHash = window.location.hash;
             const currentPage = currentPath.split('/').pop() || 'index.html';
 
             function updateActiveNav() {
@@ -199,7 +203,6 @@
             updateActiveNav();
         });
 
-        // Mobile menu functionality
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
         const body = document.querySelector('body');
@@ -217,9 +220,6 @@
                 body.classList.remove('no-scroll');
             });
         });
-
-        // Load gallery on page load - single call
-        document.addEventListener('DOMContentLoaded', loadGallery);
     </script>
 </body>
 </html>
