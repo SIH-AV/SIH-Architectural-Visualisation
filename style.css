@@ -74,17 +74,17 @@ body {
 
 /* Active state styling */
 .nav-links a.active {
-    color: #bd6717;
+    color: #ce7018;
 }
 
 /* Hover effect */
 .nav-links a:hover {
-    color: #bd6717;
+    color: #ce7018;
 }
 
 /* Add this after the existing nav-links a:hover rule */
 .nav-links a.active {
-    color: #bd6717;
+    color: #ce7018;
     position: relative;
 }
 
@@ -96,7 +96,7 @@ body {
     transform: translateX(-50%);
     width: 30px;
     height: 2px;
-    background-color: #bd6717;
+    background-color: #ce7018;
 }
 
 /* Updated Home Section */
@@ -164,7 +164,7 @@ body {
     margin-bottom: 2.5rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    color: #bd6717;
+    color: #ce7018;
     white-space: nowrap;
 }
 
@@ -285,7 +285,7 @@ body {
 }
 
 .tier-price {
-    color: #bd6717;
+    color: #ce7018;
     font-weight: 500;
     font-size: 1.1rem;
 }
@@ -370,7 +370,7 @@ body {
 .submit-btn {
     width: 100%;
     padding: 1rem;
-    background: #bd6717;
+    background: #ce7018;
     color: white;
     border: none;
     border-radius: 5px;
@@ -380,7 +380,7 @@ body {
 }
 
 .submit-btn:hover {
-    background: #bd6717;
+    background: #ce7018;
 }
 
 /* Section Headers */
