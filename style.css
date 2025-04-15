@@ -10,10 +10,15 @@
 
 html {
     scroll-behavior: smooth;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 body {
     color: white;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    width: 100%;
+    max-width: 100%;
 }
 
 /* Navigation */
@@ -22,7 +27,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    padding: 1.5rem 2rem;
+    padding: clamp(0.8rem, 2vw, 1.5rem) clamp(0.8rem, 3vw, 2rem);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -38,7 +43,7 @@ body {
 }
 
 .logo-image {
-    width: 200px;
+    width: clamp(100px, 30vw, 200px);
     height: auto;
     object-fit: contain;
 }
@@ -53,10 +58,10 @@ body {
 .nav-links a {
     color: white;
     text-decoration: none;
-    font-size: 1.1rem;
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
     font-weight: 500;
     transition: color 0.3s ease;
-    padding: 0.5rem 1.5rem;
+    padding: 0.5rem clamp(0.5rem, 1.5vw, 1.5rem);
     position: relative;
 }
 
@@ -106,8 +111,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 8rem 2rem; /* Increased padding for centering */
+    padding: clamp(4rem, 6vw, 8rem) clamp(0.8rem, 3vw, 2rem);
     overflow: hidden;
+    width: 100%;
 }
 
 .background-container {
@@ -140,7 +146,7 @@ body {
     max-width: 1200px;
     width: 100%;
     z-index: 1;
-    padding: 6rem 9rem 0;
+    padding: clamp(2rem, 4vw, 6rem) clamp(0.5rem, 3vw, 2rem) 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -150,22 +156,21 @@ body {
 
 .subtitle {
     color: #ffffff;
-    font-size: 1.2rem;
+    font-size: clamp(0.8rem, 1.5vw, 1.2rem);
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: clamp(0.5px, 0.5vw, 2px);
     display: block;
-    margin-bottom: 1.5rem;
+    margin-bottom: clamp(0.8rem, 1.5vw, 1.5rem);
     font-weight: 600;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .hero h1 {
-    font-size: 3.7rem;
-    margin-bottom: 2.5rem;
+    font-size: clamp(1.6rem, 5vw, 3.7rem);
+    margin-bottom: clamp(1rem, 2vw, 2.5rem);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: #ce7018;
-    white-space: nowrap;
 }
 
 .description-container {
@@ -174,11 +179,11 @@ body {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: clamp(1rem, 2vw, 2rem);
 }
 
 .main-description {
-    font-size: 1.4em;
+    font-size: clamp(0.9rem, 1.8vw, 1.4em);
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: #ffffff;
@@ -187,12 +192,12 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 0;
+    padding: 0 clamp(0.5rem, 1vw, 1rem);
 }
 
 .main-description:last-child {
     margin-bottom: 0;
 }
-
 
 /* Dark background for other sections */
 .dark-bg {
@@ -202,41 +207,48 @@ body {
 /* Common Section Styles */
 .section {
     min-height: 100vh;
-    padding: 140px 2rem 80px; /* Reduced bottom padding from 120px to 80px */
+    padding: clamp(70px, 10vh, 120px) clamp(0.5rem, 3vw, 2rem) clamp(30px, 8vh, 80px);
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
 }
 
 /* Updated Pricing Section Styles */
 .pricing-section {
-    padding: 60px 2rem; /* Reduced from 120px to 60px */
+    padding: clamp(30px, 6vh, 60px) clamp(0.5rem, 3vw, 2rem);
+    width: 100%;
 }
 
 .pricing-title {
     color: #ffffff;
-    font-size: 2.5rem;
+    font-size: clamp(1.4rem, 3vw, 2.5rem);
     text-align: center;
     margin-top: 5px;
-    margin-bottom: 1.5rem; /* Significantly reduced from 4rem to 1.5rem */
+    margin-bottom: clamp(1rem, 1.5vw, 1.5rem);
 }
 
+/* Updated pricing container to handle 3 columns on larger screens */
 .pricing-container {
     display: flex;
     justify-content: center;
-    gap: 3rem;
-    max-width: 1800px;
+    gap: clamp(1rem, 2vw, 2rem);
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 1rem 2rem;
+    padding: clamp(0.5rem, 1vw, 1rem);
     flex-wrap: wrap;
+    width: 100%;
 }
 
 .pricing-card {
     background: #2c2c2c;
     border-radius: 20px;
-    padding: 4rem;
-    width: 500px;
+    padding: clamp(1rem, 2vw, 2rem);
+    flex: 1;
+    min-width: 280px;
+    max-width: 450px;
     transition: transform 0.3s ease;
+    margin-bottom: clamp(0, 1.5rem, 2rem);
 }
 
 .pricing-card:hover {
@@ -244,24 +256,24 @@ body {
 }
 
 .card-title {
-    color: #bd6717;  /* Changed from white to orange */
-    font-size: 1.8rem;  /* Reduced from 2.2rem */
-    margin-bottom: 2rem;
+    color: #bd6717;
+    font-size: clamp(1.2rem, 2vw, 1.8rem);
+    margin-bottom: clamp(0.8rem, 1.5vw, 1.5rem);
     font-weight: 600;
 }
 
 .card-description {
     color: rgba(255, 255, 255, 0.9);
-    font-size: 1.2rem;
+    font-size: clamp(0.9rem, 1.5vw, 1.2rem);
     line-height: 1.6;
-    margin-bottom: 2.5rem;
+    margin-bottom: clamp(1.5rem, 2vw, 2rem);
 }
 
 /* Updated Pricing Tiers */
 .price-tiers {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: clamp(1rem, 1.5vw, 1.5rem);
 }
 
 .tier {
@@ -277,7 +289,7 @@ body {
 
 .tier-name {
     color: rgba(255, 255, 255, 0.8);
-    font-size: 1.1rem;
+    font-size: clamp(0.85rem, 1.3vw, 1.1rem);
     line-height: 1.4;
     margin-bottom: 0.25rem;
     padding-right: 1rem;
@@ -287,26 +299,25 @@ body {
 .tier-price {
     color: #ce7018;
     font-weight: 500;
-    font-size: 1.1rem;
+    font-size: clamp(0.9rem, 1.3vw, 1.1rem);
 }
-
 
 /* Contact Section */
 .contact-info {
     width: 100%;
     max-width: 800px;
-    margin: 0 auto 3rem auto;
-    padding: 0 2rem;
+    margin: 0 auto clamp(1.5rem, 3vw, 3rem) auto;
+    padding: 0 clamp(0.5rem, 1vw, 1rem);
 }
 
 .contact-details {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    padding: 2rem;
+    padding: clamp(1.2rem, 2vw, 2rem);
     border-radius: 20px;
     display: flex;
     justify-content: center;
-    gap: 3rem;
+    gap: clamp(1.2rem, 2vw, 2rem);
     flex-wrap: wrap;
 }
 
@@ -323,38 +334,38 @@ body {
 .info-item {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    font-size: 1.2rem;
+    gap: clamp(0.5rem, 1vw, 1rem);
+    font-size: clamp(0.9rem, 1.5vw, 1.2rem);
 }
 
 .contact-container {
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 clamp(0.5rem, 1vw, 1rem);
 }
 
 .contact-form {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    padding: 3rem;
+    padding: clamp(1.2rem, 2vw, 2rem);
     border-radius: 20px;
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: clamp(1rem, 1.5vw, 1.5rem);
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
     width: 100%;
-    padding: 1rem;
+    padding: clamp(0.8rem, 1vw, 1rem);
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 5px;
     color: white;
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 1vw, 1rem);
 }
 
 .form-group textarea {
@@ -369,13 +380,13 @@ body {
 
 .submit-btn {
     width: 100%;
-    padding: 1rem;
+    padding: clamp(0.8rem, 1vw, 1rem);
     background: #ce7018;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 1.1vw, 1.1rem);
     transition: background 0.3s ease;
 }
 
@@ -385,123 +396,74 @@ body {
 
 /* Section Headers */
 .section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 4rem;
+    font-size: clamp(1.6rem, 3vw, 2.5rem);
+    margin-bottom: clamp(1.5rem, 3vw, 3rem);
     text-align: center;
     color: white;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-@media (max-width: 768px) {
-    .section {
-        padding: 100px 1rem;
-    }
-
-    .pricing-container {
-        padding: 1rem;
-        gap: 2rem;
-    }
-
-    .pricing-card,
-    .pricing-card.featured {
-        width: 100%;
-        max-width: 500px;
-        padding: 3rem;
-        transform: none;
-    }
-
-    .hero h1 {
-        font-size: 2.5rem;
-    }
-
-    .nav-links {
-        gap: 1rem;
-    }
-
-    .main-description {
-        font-size: 1.1rem;
-    }
-
-    .sub-description {
-        font-size: 0.9rem;
-    }
-
-    .contact-details {
-        padding: 1.5rem;
-        gap: 1.5rem;
-    }
-    
-    .info-item {
-        font-size: 1rem;
-    }
-}
-
-/* Add these styles to your style.css file */
-
+/* Footer Styles */
 .footer {
     background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(10px);
-    padding: 2rem 0;
+    padding: clamp(1rem, 2vw, 2rem) 0;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 .footer-content {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 clamp(0.8rem, 2vw, 2rem);
+    width: 100%;
 }
 
 .footer p {
     color: rgba(255, 255, 255, 0.8);
-    font-size: 1.0rem;
+    font-size: clamp(0.8rem, 1.2vw, 1.0rem);
     line-height: 1.6;
 }
 
-@media (max-width: 768px) {
-    .footer {
-        padding: 1.5rem 0;
-    }
-    
-    .footer p {
-        font-size: 1rem;
-    }
-}
-
-/* Add these new gallery styles after your existing CSS */
-
 /* Gallery Specific Styles */
 .gallery-content {
-    padding-top: 120px;
+    padding-top: clamp(80px, 12vh, 120px);
     min-height: 100vh;
-    background: #1a1a1a;
+    background: #000000;
     width: 100%;
 }
 
 .gallery-container {
     width: 100%;
     margin: 0 auto;
-    padding: 1rem 2rem;
+    padding: clamp(0.5rem, 1vw, 1rem);
 }
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 1.5rem;
-    padding: 0.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(clamp(150px, 25vw, 250px), 1fr));
+    gap: clamp(0.8rem, 1.5vw, 1.5rem);
+    padding: clamp(0.3rem, 0.5vw, 0.5rem);
     width: 100%;
 }
 
 .gallery-item {
     position: relative;
-    aspect-ratio: 4/3;
+    aspect-ratio: 3/1.9;
     overflow: hidden;
     border-radius: 8px;
     cursor: pointer;
     background: rgba(255, 255, 255, 0.1);
     width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 .gallery-item img {
@@ -546,7 +508,7 @@ body {
     top: 20px;
     right: 30px;
     color: white;
-    font-size: 40px;
+    font-size: clamp(30px, 5vw, 40px);
     cursor: pointer;
     z-index: 2001;
 }
@@ -559,8 +521,8 @@ body {
     background: rgba(255, 255, 255, 0.1);
     color: white;
     border: none;
-    width: 50px;
-    height: 50px;
+    width: clamp(40px, 5vw, 50px);
+    height: clamp(40px, 5vw, 50px);
     cursor: pointer;
     border-radius: 50%;
     transition: background 0.3s ease;
@@ -578,61 +540,27 @@ body {
 }
 
 .nav-btn span {
-    font-size: 20px; /* Increased from 24px */
+    font-size: clamp(16px, 2vw, 20px);
     display: inline-block;
     line-height: 1;
 }
 
 .prev {
-    left: 30px;
+    left: clamp(10px, 2vw, 20px);
 }
 
 .next {
-    right: 30px;
-}
-
-.gallery-item {
-    position: relative;
-    aspect-ratio: 3/1.9;
-    overflow: hidden;
-    border-radius: 8px;
-    cursor: pointer;
-    background: rgba(255, 255, 255, 0.1);
-    width: 100%;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition for smooth lift */
-}
-
-.gallery-item:hover {
-    transform: translateY(-8px); /* Adds lift effect */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Adds shadow for depth */
-}
-
-.gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.gallery-item:hover img {
-    transform: scale(1.05);
-}
-
-.gallery-content {
-    padding-top: 120px;
-    min-height: 100vh;
-    background: #000000;  /* Changed from #1a1a1a to #000000 */
-    width: 100%;
+    right: clamp(10px, 2vw, 20px);
 }
 
 /* Services Page Specific Styles */
 .services-content {
-    padding-top: 120px;
+    padding-top: clamp(80px, 12vh, 120px);
     min-height: 100vh;
     background: #1a1a1a;
     display: flex;
     align-items: center;
-    padding-bottom: 50px;
+    padding-bottom: clamp(30px, 5vh, 50px);
     width: 100%;
 }
 
@@ -640,9 +568,10 @@ body {
     display: flex;
     width: 100%;
     margin: 0;
-    padding: 0 0 0 3rem;
-    gap: 4rem;
+    padding: 0 clamp(0.8rem, 2vw, 2rem);
+    gap: clamp(1.5rem, 3vw, 3rem);
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .services-image {
@@ -650,78 +579,38 @@ body {
     position: relative;
     overflow: hidden;
     border-radius: 20px;
-    /* Removed fixed height to respect aspect ratio */
+    min-width: 280px;
 }
 
 .services-image img {
     width: 100%;
-    height: auto; /* Changed from 100% to auto to maintain aspect ratio */
-    display: block; /* Added to prevent any unwanted spacing */
+    height: auto;
+    display: block;
     border-radius: 20px;
-    object-fit: contain; /* Changed from cover to contain */
+    object-fit: contain;
 }
 
 .services-text {
     flex: 1.2;
     color: white;
-    padding: 4rem 6rem 4rem 0;
+    padding: clamp(1rem, 2vw, 2rem);
     display: flex;
     flex-direction: column;
     justify-content: center;
+    min-width: 280px;
 }
 
 .services-title {
-    font-size: 2.5rem;  /* Changed from 3.5rem to match other titles */
-    margin-bottom: 2rem;
-    color: white;       /* Changed from #ff6b00 to white to match other titles */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Added to match other titles */
+    font-size: clamp(1.6rem, 3vw, 2.5rem);
+    margin-bottom: clamp(1rem, 2vw, 2rem);
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .services-description {
-    font-size: 1.2rem;
+    font-size: clamp(0.9rem, 1.5vw, 1.2rem);
     line-height: 1.8;
     color: rgba(255, 255, 255, 0.9);
-}
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .services-container {
-        flex-direction: column;
-        padding: 0 2rem;
-        gap: 2rem;
-    }
-
-    .services-image {
-        width: 100%;
-    }
-
-    .services-text {
-        padding: 2rem 0;
-    }
-
-    .services-title {
-        font-size: 2.8rem;
-    }
-
-    .services-description {
-        font-size: 1.1rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .services-text {
-        padding: 2rem 0;
-    }
-
-    .services-title {
-        font-size: 2.3rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .services-description {
-        font-size: 1rem;
-        line-height: 1.6;
-    }
 }
 
 /* Mobile Navigation Styles */
@@ -729,8 +618,8 @@ body {
     display: none;
     flex-direction: column;
     justify-content: space-between;
-    width: 30px;
-    height: 21px;
+    width: clamp(25px, 3vw, 30px);
+    height: clamp(18px, 2.5vw, 21px);
     cursor: pointer;
     z-index: 1001;
     position: relative;
@@ -749,7 +638,121 @@ body.no-scroll {
     overflow: hidden;
 }
 
-@media (max-width: 768px) {
+/* IMPROVED MEDIA QUERIES */
+
+/* Large desktop and up */
+@media (min-width: 1200px) {
+    .gallery-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+    
+    /* Three pricing cards in a row on large screens */
+    .pricing-container {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+    
+    .pricing-card {
+        flex: 1;
+        min-width: 0; /* Allow cards to shrink below min-width if needed */
+        max-width: 32%; /* Ensure cards don't get too wide */
+        margin-bottom: 0;
+    }
+}
+
+/* Desktop to laptop */
+@media (min-width: 1025px) and (max-width: 1199px) {
+    .gallery-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .hero {
+        padding: clamp(3rem, 4vw, 4rem) clamp(1.5rem, 2vw, 2rem) 0;
+    }
+    
+    /* Three pricing cards in a row */
+    .pricing-container {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+    
+    .pricing-card {
+        flex: 1;
+        min-width: 0;
+        max-width: 32%;
+        margin-bottom: 0;
+    }
+}
+
+/* Tablet to small laptop */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .nav-links {
+        gap: 0;
+    }
+
+    .nav-links a {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+    }
+
+    .hero h1 {
+        font-size: clamp(2.5rem, 3vw, 3rem);
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .hero {
+        padding: clamp(2rem, 3vw, 3rem) clamp(1rem, 1.5vw, 1.5rem) 0;
+    }
+
+    .services-container {
+        flex-direction: column;
+        padding: 0 clamp(1.5rem, 2vw, 2rem);
+        gap: clamp(1.5rem, 2vw, 2rem);
+    }
+
+    .services-image {
+        width: 100%;
+        max-width: 600px;
+    }
+
+    .services-text {
+        padding: clamp(1.5rem, 2vw, 2rem) 0;
+        width: 100%;
+    }
+    
+    /* Two pricing cards in a row */
+    .pricing-container {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .pricing-card {
+        flex: 0 0 48%;
+        max-width: 48%;
+        margin-bottom: clamp(1.5rem, 2vw, 2rem);
+    }
+    
+    /* If there are 3 cards, make sure they're properly spaced */
+    .pricing-card:last-child {
+        margin-bottom: 0;
+    }
+    
+    .pricing-card:nth-last-child(2):nth-child(odd) {
+        margin-bottom: 0;
+    }
+    
+    .main-description {
+        font-size: clamp(1rem, 1.2vw, 1.2rem);
+    }
+}
+
+/* Mobile landscape to tablet portrait */
+@media (min-width: 481px) and (max-width: 768px) {
     .hamburger {
         display: flex;
     }
@@ -774,7 +777,7 @@ body.no-scroll {
     }
 
     .nav-links a {
-        margin: 15px 0;
+        margin: 10px 0;
         font-size: 1.2rem;
         width: 100%;
     }
@@ -796,330 +799,277 @@ body.no-scroll {
         transform: translateY(-9px) rotate(-45deg);
     }
 
-    /* Adjust main content spacing */
-    .main-content {
-        padding-top: 80px;
+    .navbar {
+        padding: clamp(0.8rem, 1vw, 1rem) clamp(1.2rem, 1.5vw, 1.5rem);
     }
 
-    /* Adjust hero section for mobile */
+    .logo-image {
+        width: clamp(130px, 30vw, 150px);
+    }
+
     .hero {
-        padding: 2rem 1rem;
+        padding: clamp(1.5rem, 2vw, 2rem) clamp(0.8rem, 1vw, 1rem) 0;
     }
 
     .hero h1 {
-        font-size: 2rem;
+        font-size: clamp(1.8rem, 4vw, 2.2rem);
         white-space: normal;
+        margin-bottom: clamp(1rem, 1.5vw, 1.5rem);
     }
 
     .subtitle {
-        font-size: 1rem;
+        font-size: clamp(0.9rem, 1vw, 1rem);
+        margin-bottom: clamp(0.8rem, 1vw, 1rem);
     }
 
     .main-description {
-        font-size: 1rem;
+        font-size: clamp(1rem, 1.1vw, 1.1rem);
         line-height: 1.6;
-    }
-
-    /* Adjust pricing cards for mobile */
-    .pricing-card {
-        width: 100%;
-        padding: 2rem;
-    }
-
-    /* Adjust services page for mobile */
-    .services-container {
-        flex-direction: column;
-        padding: 1rem;
-    }
-
-    .services-text {
-        padding: 2rem 1rem;
-    }
-
-    .services-title {
-        font-size: 2rem;
-    }
-
-    /* Adjust gallery grid for mobile */
-    .gallery-grid {
-        grid-template-columns: repeat(1, 1fr);
-        gap: 1rem;
-    }
-
-    /* Adjust contact section for mobile */
-    .contact-form {
-        padding: 2rem;
-    }
-
-    .contact-details {
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-}
-
-/* Tablet Styles */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .nav-links {
-        gap: 1rem;
-    }
-
-    .nav-links a {
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
-    }
-
-    .hero h1 {
-        font-size: 3rem;
     }
 
     .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: clamp(0.8rem, 1vw, 1rem);
     }
-
-    .pricing-container {
-        gap: 2rem;
+    
+    .section {
+        padding: clamp(70px, 9vh, 90px) clamp(0.8rem, 1vw, 1rem) clamp(40px, 5vh, 50px);
     }
-
+    
+    .section h2 {
+        font-size: clamp(1.8rem, 2vw, 2rem);
+        margin-bottom: clamp(1.5rem, 2vw, 2rem);
+    }
+    
+    .pricing-title {
+        font-size: clamp(1.8rem, 2vw, 2rem);
+    }
+    
+    /* One card per row */
     .pricing-card {
-        width: calc(50% - 1rem);
+        flex: 0 0 100%;
+        max-width: 450px;
+        width: 100%;
+        margin-bottom: clamp(1.5rem, 2vw, 2rem);
+    }
+    
+    .pricing-card:last-child {
+        margin-bottom: 0;
+    }
+    
+    .services-container {
+        flex-direction: column;
+        padding: 0 clamp(1.2rem, 1.5vw, 1.5rem);
+        gap: clamp(1.5rem, 2vw, 2rem);
+    }
+    
+    .services-text {
+        padding: clamp(0.8rem, 1vw, 1rem) 0;
+    }
+    
+    .services-title {
+        font-size: clamp(1.8rem, 2vw, 2rem);
+        margin-bottom: clamp(1.2rem, 1.5vw, 1.5rem);
+    }
+    
+    .contact-details {
+        padding: clamp(1.2rem, 1.5vw, 1.5rem);
+        gap: clamp(1.2rem, 1.5vw, 1.5rem);
+    }
+    
+    .info-item {
+        font-size: clamp(0.9rem, 1vw, 1rem);
+    }
+    
+    .contact-form {
+        padding: clamp(1.2rem, 1.5vw, 1.5rem);
     }
 }
 
-/* Additional responsive adjustments */
+/* Mobile phones */
 @media (max-width: 480px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%; /* Increased from 70% for better visibility */
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 80px 20px;
+        transition: 0.3s ease-in-out;
+        z-index: 1000;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links a {
+        margin: 10px 0;
+        font-size: 1.1rem;
+        width: 100%;
+        padding: 0.5rem;
+    }
+
+    /* Remove separator lines in mobile view */
+    .nav-links a:not(:last-child)::after {
+        display: none;
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+    }
+
     .navbar {
-        padding: 1rem;
+        padding: 0.8rem;
     }
 
     .logo-image {
-        width: 150px;
+        width: clamp(110px, 25vw, 130px);
+    }
+
+    .hero {
+        padding: clamp(1rem, 1.5vw, 1.5rem) clamp(0.5rem, 0.8vw, 0.8rem) 0;
     }
 
     .hero h1 {
-        font-size: 1.8rem;
-    }
-
-    .pricing-title {
-        font-size: 2rem;
-    }
-
-    .contact-container {
-        padding: 0 1rem;
-    }
-}
-
-/* Media query for Samsung Galaxy S10 and similar devices */
-@media (max-width: 360px) {
-    /* Adjust hero section */
-    .hero h1 {
-        font-size: 2rem;
-        padding: 2rem 1rem;
+        font-size: clamp(1.6rem, 3.5vw, 1.8rem);
+        white-space: normal;
+        margin-bottom: clamp(0.8rem, 1vw, 1rem);
     }
 
     .subtitle {
-        font-size: 1rem;
+        font-size: clamp(0.8rem, 0.9vw, 0.9rem);
+        margin-bottom: clamp(0.6rem, 0.8vw, 0.8rem);
+        letter-spacing: 1px;
     }
 
     .main-description {
-        font-size: 0.9rem;
+        font-size: clamp(0.9rem, 1vw, 1rem);
+        line-height: 1.5;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(1, 1fr);
+        gap: clamp(0.8rem, 1vw, 1rem);
+    }
+    
+    .section {
+        padding: clamp(60px, 8vh, 80px) clamp(0.6rem, 0.8vw, 0.8rem) clamp(30px, 4vh, 40px);
+    }
+    
+    .section h2 {
+        font-size: clamp(1.6rem, 1.8vw, 1.8rem);
+        margin-bottom: clamp(1.2rem, 1.5vw, 1.5rem);
+    }
+    
+    .pricing-section {
+        padding: clamp(30px, 4vh, 40px) clamp(0.6rem, 0.8vw, 0.8rem);
+    }
+    
+    .pricing-title {
+        font-size: clamp(1.6rem, 1.8vw, 1.8rem);
+        margin-bottom: clamp(0.8rem, 1vw, 1rem);
+    }
+    
+    /* One card per row on mobile */
+    .pricing-card {
+        flex: 0 0 100%;
+        width: 100%;
+        margin-bottom: clamp(1.2rem, 1.5vw, 1.5rem);
+    }
+    
+    .pricing-card:last-child {
+        margin-bottom: 0;
+    }
+    
+    .card-title {
+        font-size: clamp(1.3rem, 1.5vw, 1.5rem);
+        margin-bottom: clamp(0.8rem, 1vw, 1rem);
+    }
+    
+    .card-description {
+        font-size: clamp(0.9rem, 1vw, 1rem);
+        margin-bottom: clamp(1.2rem, 1.5vw, 1.5rem);
+    }
+    
+    .services-container {
+        flex-direction: column;
+        padding: 0 clamp(0.6rem, 0.8vw, 0.8rem);
+        gap: clamp(1.2rem, 1.5vw, 1.5rem);
+    }
+    
+    .services-text {
+        padding: clamp(0.8rem, 1vw, 1rem) 0;
+    }
+    
+    .services-title {
+        font-size: clamp(1.6rem, 1.8vw, 1.8rem);
+        margin-bottom: clamp(0.8rem, 1vw, 1rem);
+    }
+    
+    .services-description {
+        font-size: clamp(0.9rem, 1vw, 1rem);
         line-height: 1.6;
     }
-
-    /* Navbar adjustments */
-    .navbar {
-        padding: 1rem;
-    }
-
-    .nav-links {
-        flex-direction: column;
-        gap: 0.5rem;
-        text-align: center;
-    }
-
-    .nav-links a {
-        font-size: 0.9rem;
-        padding: 0.5rem;
-    }
-
-    /* Pricing card adjustments */
-    .pricing-card {
-        padding: 2rem;
-        width: 100%;
-    }
-
-    .card-title {
-        font-size: 1.5rem;
-    }
-
-    .card-description {
-        font-size: 1rem;
-    }
-
-    .tier-name {
-        font-size: 0.9rem;
-    }
-
-    .tier-price {
-        font-size: 1rem;
-    }
-
-    /* Contact section adjustments */
-    .contact-details {
-        gap: 1rem;
-        padding: 1rem;
-    }
-
-    .info-item {
-        font-size: 0.9rem;
-    }
-
-    /* Footer adjustments */
-    .footer {
-        padding: 1rem 0;
-    }
-
-    .footer p {
-        font-size: 0.8rem;
-    }
-
-    /* Gallery adjustments */
-    .gallery-grid {
-        grid-template-columns: repeat(2, 1fr); /* Show two items per row */
-        gap: 1rem;
-    }
-
-    .gallery-item {
-        border-radius: 6px;
-    }
-
-    /* Hamburger menu adjustments */
-    .hamburger-menu {
-        font-size: 1.5rem;
-    }
-
-    .hamburger-menu.open + .nav-links {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    /* General padding and spacing adjustments */
-    .section {
-        padding: 80px 1rem;
-    }
-
-    .pricing-section {
-        padding: 40px 1rem;
-    }
-
+    
     .contact-container {
-        padding: 1rem;
+        padding: 0 clamp(0.6rem, 0.8vw, 0.8rem);
     }
-}
-
-/* Media query for very small and tall devices (smaller than Galaxy S10) */
-@media (max-width: 320px), (max-height: 600px) {
-    /* Adjust hero section */
-    .hero h1 {
-        font-size: 1.8rem; /* Slightly smaller */
-        padding: 1.5rem 0.5rem;
-    }
-
-    .subtitle {
-        font-size: 0.9rem;
-    }
-
-    .main-description {
-        font-size: 0.8rem;
-        line-height: 1.4;
-    }
-
-    /* Navbar adjustments */
-    .navbar {
-        padding: 0.5rem;
-    }
-
-    .nav-links {
-        flex-direction: column;
-        gap: 0.3rem;
-        text-align: center;
-    }
-
-    .nav-links a {
-        font-size: 0.8rem;
-        padding: 0.3rem;
-    }
-
-    /* Pricing card adjustments */
-    .pricing-card {
-        padding: 1rem;
-        width: 100%;
-    }
-
-    .card-title {
-        font-size: 1.3rem;
-    }
-
-    .card-description {
-        font-size: 0.9rem;
-    }
-
-    .tier-name {
-        font-size: 0.8rem;
-    }
-
-    .tier-price {
-        font-size: 0.9rem;
-    }
-
-    /* Contact section adjustments */
+    
     .contact-details {
-        gap: 0.8rem;
-        padding: 0.5rem;
-    }
-
-    .info-item {
-        font-size: 0.8rem;
-    }
-
-    /* Footer adjustments */
-    .footer {
-        padding: 0.5rem 0;
-    }
-
-    .footer p {
-        font-size: 0.7rem;
-    }
-
-    /* Gallery adjustments */
-    .gallery-grid {
-        grid-template-columns: 1fr; /* Show one item per row */
-        gap: 0.8rem;
-    }
-
-    .gallery-item {
-        border-radius: 4px;
-    }
-
-    /* Hamburger menu adjustments */
-    .hamburger-menu {
-        font-size: 1.3rem;
-    }
-
-    .hamburger-menu.open + .nav-links {
+        padding: clamp(1rem, 1.2vw, 1.2rem);
+        gap: clamp(1rem, 1.2vw, 1.2rem);
         flex-direction: column;
-        align-items: center;
     }
-
-    /* General padding and spacing adjustments */
-    .section {
-        padding: 60px 0.5rem;
+    
+    .info-item {
+        font-size: clamp(0.85rem, 0.9vw, 0.9rem);
     }
-
-    .pricing-section {
-        padding: 30px 0.5rem;
+    
+    .contact-form {
+        padding: clamp(1rem, 1.2vw, 1.2rem);
     }
-
-    .contact-container {
-        padding: 0.5rem;
+    
+    .form-group input,
+    .form-group textarea {
+        padding: clamp(0.7rem, 0.8vw, 0.8rem);
+    }
+    
+    .footer {
+        padding: clamp(0.8rem, 1vw, 1rem) 0;
+    }
+    
+    .footer p {
+        font-size: clamp(0.85rem, 0.9vw, 0.9rem);
+    }
+    
+    /* Navigation button adjustments */
+    .prev {
+        left: clamp(8px, 1vw, 10px);
+    }
+    
+    .next {
+        right: clamp(8px, 1vw, 10px);
+    }
+    
+    .nav-btn {
+        width: clamp(35px, 4vw, 40px);
+        height: clamp(35px, 4vw, 40px);
     }
 }
