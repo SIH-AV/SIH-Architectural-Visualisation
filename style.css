@@ -216,8 +216,13 @@ body {
 
 /* Updated Pricing Section Styles */
 .pricing-section {
-    padding: clamp(30px, 6vh, 60px) clamp(0.5rem, 3vw, 2rem);
+    padding: clamp(80px, 15vh, 120px) clamp(0.5rem, 3vw, 2rem) clamp(30px, 8vh, 80px);
     width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scroll-margin-top: clamp(60px, 10vh, 80px); /* Add scroll margin for anchor navigation */
 }
 
 .pricing-title {
@@ -302,7 +307,42 @@ body {
     font-size: clamp(0.9rem, 1.3vw, 1.1rem);
 }
 
+#pricing {
+    padding-top: clamp(80px, 15vh, 120px);
+    min-height: 100vh;
+    scroll-margin-top: clamp(60px, 10vh, 80px); /* Add scroll margin for anchor navigation */
+}
+
+.pricing-section {
+    width: 100%;
+    padding: clamp(30px, 6vh, 60px) clamp(0.5rem, 3vw, 2rem);
+}
+
 /* Contact Section */
+
+#contact {
+    padding-top: clamp(80px, 15vh, 120px);
+    min-height: 100vh;
+    scroll-margin-top: clamp(60px, 10vh, 80px); /* Add scroll margin for anchor navigation */
+}
+
+.contact-info {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto clamp(1.5rem, 3vw, 3rem) auto;
+    padding: 0 clamp(0.5rem, 1vw, 1rem);
+}
+
+.contact-details {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: clamp(1.2rem, 2vw, 2rem);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    gap: clamp(1.2rem, 2vw, 2rem);
+    flex-wrap: wrap;
+}
 .contact-info {
     width: 100%;
     max-width: 800px;
